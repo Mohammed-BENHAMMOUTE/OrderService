@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package inpt.aseds.orderservice;
+
+option java_multiple_files = true;
+option java_package = "inpt.aseds.orderservice.proto";
+option java_outer_classname = "OrderProto";
+
+enum OrderState {
+  CREATED = 0;
+  AVAILABLE = 1;
+  DELIVERED = 2;
+  FAILED = 3;
+}
+
+message Product {
+  int64 productId = 1;
+  string productName = 2;
+  double productPrice = 3;
+  int32 productQuantity = 4;
+}
+
+message Order {
+  int64 id = 1;
+  Product product = 2;
+  double price = 3;
+  OrderState state = 4;
+}
+
+service ProductService {
+  rpc getProductById(GetProductRequest) returns (Product);
+}
+
+message GetProductRequest {
+  int64 id = 1;
+}
