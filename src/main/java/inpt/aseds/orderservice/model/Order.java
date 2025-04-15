@@ -15,16 +15,19 @@ public class Order {
     @Id @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
-    private Product product;
+
+    @Column(name = "product_id", nullable = false)
+    private long productId;
 
     @Column(name = "product_price", nullable = false)
     @Positive
     private double price;
 
+    @Column(name = "quantity", nullable = false)
+    @Positive
+    private int quantity = 1;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderState state;
 }
-
